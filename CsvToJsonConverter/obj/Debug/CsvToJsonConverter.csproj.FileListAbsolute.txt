@@ -1,0 +1,6 @@
+D:\TestSource\TypingTest\CsvToJsonConverter\bin\Debug\CsvToJsonConverter.exe.config
+D:\TestSource\TypingTest\CsvToJsonConverter\bin\Debug\CsvToJsonConverter.exe
+D:\TestSource\TypingTest\CsvToJsonConverter\bin\Debug\CsvToJsonConverter.pdb
+D:\TestSource\TypingTest\CsvToJsonConverter\obj\Debug\CsvToJsonConverter.csproj.CoreCompileInputs.cache
+D:\TestSource\TypingTest\CsvToJsonConverter\obj\Debug\CsvToJsonConverter.exe
+D:\TestSource\TypingTest\CsvToJsonConverter\obj\Debug\CsvToJsonConverter.pdb

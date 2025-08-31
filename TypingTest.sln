@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.35731.53
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypingTest", "TypingTest\TypingTest.csproj", "{4433849C-F6AB-4B4E-B08A-627F4888F767}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvToJsonConverter", "CsvToJsonConverter\CsvToJsonConverter.csproj", "{7CB811EC-9308-45C8-A8B1-D469DC34FB51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4433849C-F6AB-4B4E-B08A-627F4888F767}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4433849C-F6AB-4B4E-B08A-627F4888F767}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4433849C-F6AB-4B4E-B08A-627F4888F767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB811EC-9308-45C8-A8B1-D469DC34FB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB811EC-9308-45C8-A8B1-D469DC34FB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB811EC-9308-45C8-A8B1-D469DC34FB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB811EC-9308-45C8-A8B1-D469DC34FB51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,6 +12,10 @@ namespace TypingTest
 {
     public partial class Form1 : Form
     {
+
+
+     
+
         //================================================================
         // ゲーム全体の状態管理
         //================================================================
@@ -56,15 +60,17 @@ namespace TypingTest
         // 問題文関連
         //================================================================
 
-        /// <summary>
-        /// 問題文のリスト
-        /// </summary>
-        private List<string> questions;
+
 
         /// <summary>
-        /// 現在の問題文（ひらがな）
+        /// 読み込んだ全ての質問オブジェクトを保持するリスト
         /// </summary>
-        private string currentQuestionHiragana;
+        private List<Question> allQuestions;
+
+        /// <summary>
+        /// 現在の問題文（漢字などが含まれる表示用テキスト）
+        /// </summary>
+        private string currentQuestionText;
 
         /// <summary>
         /// 問題文をランダムに選択するためのジェネレーター
@@ -126,15 +132,28 @@ namespace TypingTest
 
         private void LoadQuestions()
         {
-            // ここに問題文を追加します
-            questions = new List<string>
+            try
             {
-                "こんあちはせかい",
-                "これはたいぴんぐげーむです",
-                "ぷろぐらみんぐはたのしい",
-                "やまとなでしこしちへんげ",
-                "すもももももももものうち"
-            };
+                // ★ 変更点：QuestionLoaderを使ってJSONファイルを読み込む
+                // 実行ファイルと同じ階層に "questions.json" があることを想定
+                allQuestions = QuestionLoader.LoadQuestionsFromFile("questions.json");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"問題ファイルの読み込みに失敗しました。\n{ex.Message}", "エラー");
+                // 読み込みに失敗した場合、ダミーの問題を1つ用意する
+                allQuestions = new List<Question>
+                {
+                    new Question
+                    {
+                        id = 0,
+                        text = "エラーが発生しました",
+                        kana = "えらーがはっせいしました",
+                        tags = new List<string> { "エラー" },
+                        era = 2025
+                    }
+                };
+            }
         }
 
         //================================================================
@@ -150,14 +169,16 @@ namespace TypingTest
             comboCount = 0;
             totalKeyPresses = 0;
 
-            // ランダムに問題を選択
-            currentQuestionHiragana = questions[random.Next(questions.Count)];
+            // allQuestionsリストからランダムにQuestionオブジェクトを1つ選択
+            var question = allQuestions[random.Next(allQuestions.Count)];
 
-            // 問題文を解析
-            (var kana, var roman) = RomanTypingParserJp.ConstructTypeSentence(currentQuestionHiragana);
+            // 表示用のテキスト(漢字混じり)をメンバー変数に保持
+            currentQuestionText = question.text;
+
+            // タイピング判定には .kana プロパティ(ひらがな) を使う
+            (var kana, var roman) = RomanTypingParserJp.ConstructTypeSentence(question.kana);
             _currentKana = kana;
             _currentRoman = roman;
-
             // タイピング状態をリセット
             _currentKanaIndex = 0;
             _inputRomanIndex = 0;
@@ -253,7 +274,6 @@ namespace TypingTest
 
             // 1. 問題文全体の表示 (入力済み/未入力)
             var completedKana = string.Join("", _currentKana.Take(_currentKanaIndex));
-            var remainingKana = string.Join("", _currentKana.Skip(_currentKanaIndex));
 
             // 2. 現在のターゲット（かな＋ローマ字）
             var currentKana = this.CurrentKana();
@@ -281,8 +301,10 @@ namespace TypingTest
             var statsText = $"Time: {elapsedTimeInSeconds}s | Combo: {comboCount}";
 
             // 全てを結合して表示
-            labelOutput.Text = $"問題: {completedKana}【{remainingKana}】";
+            labelOutput.Text = $"問題: {currentQuestionText}";
+
             laKana.Text = $"{currentKana} : {romanText}";
+
             textBoxInput.Text = statsText; // 便宜的にtextBoxInputに統計情報を表示
         }
 
