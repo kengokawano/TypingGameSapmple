@@ -1,0 +1,16 @@
+# Visual Studio generated
+*.vs/
+
+# User-specific files
+*.suo
+*.user
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Rider generated
+.idea/
+
+# Log files
+*.log
